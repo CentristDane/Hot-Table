@@ -57,10 +57,11 @@ app.post("/api/new", function(req, res) {
 
   if (reservationInfo.length <= 4) {
   	reservationInfo.push(newReservation);
-  } else {
-
+  	res.send(true);
+  } 
+  else {
   	waitingList.push(newReservation);
-
+  	res.send(false);
   }
 });
 
