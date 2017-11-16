@@ -58,6 +58,12 @@
 		$.post(currentURL+"/api/new", reservation, function(data){
 			//Temp console log
 			console.log(data);
+			if(data == true){
+				alert("Your reservation has been made successfully.");
+			}
+			if(data == false){
+				alert("Sorry, you are on the waiting list.");
+			}
 			//Clears form fields on submit
 			$("#resName").val("");
 			$("#resNum").val("");
