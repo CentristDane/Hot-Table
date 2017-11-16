@@ -29,6 +29,21 @@ app.get("/add", function(req, res) {
   res.sendFile(path.join(__dirname, "tables.html"));
 });
 
+// Get all characters
+app.get("/all", function(req, res) {
+  res.json(newReservation);
+});
+
+// Search for Specific Character (or all characters) - provides JSON
+app.get("/api/:reservationInfo", function(req, res) {
+  return res.json(reservationInfo)
+});
+
+app.get("/api/:waitinglist", function(req, res) {
+  return res.json(waitingList)
+
+});
+
 
 ////post function
 app.post("/api/new", function(req, res) {
@@ -38,9 +53,8 @@ app.post("/api/new", function(req, res) {
   newReservation = newReservation.name.replace(/\s+/g, "").toLowerCase();
 
   console.log(newReservation);
-
-
   res.json(newReservation);
+
   if (reservationInfo.length <= 4) {
   	reservationInfo.push(newReservation);
   } else {
@@ -48,4 +62,10 @@ app.post("/api/new", function(req, res) {
   	waitingList.push(newReservation);
 
   }
+});
+
+// Starts the server to begin listening
+// =============================================================
+app.listen(PORT, function() {
+  console.log("App listening on PORT " + PORT);
 });
