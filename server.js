@@ -35,11 +35,11 @@ app.get("/all", function(req, res) {
 });
 
 // Search for Specific Character (or all characters) - provides JSON
-app.get("/api/:reservationInfo", function(req, res) {
+app.get("/api/reservationInfo", function(req, res) {
   return res.json(reservationInfo)
 });
 
-app.get("/api/:waitingList", function(req, res) {
+app.get("/api/waitingList", function(req, res) {
   return res.json(waitingList)
 
 });
@@ -51,8 +51,6 @@ app.post("/api/new", function(req, res) {
   // This works because of our body-parser middleware
   var newReservation = req.body;
 
-  console.log(newReservation);
-  res.json(newReservation);
 
   if (reservationInfo.length <= 4) {
   	reservationInfo.push(newReservation);
@@ -62,8 +60,8 @@ app.post("/api/new", function(req, res) {
   	waitingList.push(newReservation);
   	res.send(false);
   }
-  console.log(waitingList);
-  console.log(reservationInfo);
+  console.log("Waiting list: "+waitingList);
+  console.log("Reservationlist: " +reservationInfo);
 });
 
 // Starts the server to begin listening
