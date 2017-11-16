@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Reservation Page</title>
+	<script
+  src="https://code.jquery.com/jquery-3.2.1.min.js"
+  integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+  crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+</head>
+<body>
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12">
+				<div class="jumbotron">
+					<h1>Okay restaurant</h1>
+					<hr>
+					<h3>Make your Reservation</h3>
+					<a href="/tables"><button id="tables">View Tables</button></a>
+					<a href="/"><button id="home">Home</button></a>
+				</div><!--End jumbo-->
+			</div><!--End col-->
+		</div><!--End row-->
+		<div class="row">
+			<div class="col-md-12">
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						<h5 class="panel-title">Complete Reservation</h5>
+					</div><!--End heading-->
+					<div class="panel-body">
+						<form role="form">
+							<input type="text" class="form-control" id="resName" placeholder="Enter your name">
+							<input type="text" class="form-control" id="resNum" placeholder="Enter your phone number">
+							<input type="text" class="form-control" id="resEmail" placeholder="Enter your email">
+							<input type="text" class="form-control" id="resID" placeholder="Enter a unique ID (ex: Surname + House number)">
+							<button type="submit" class="btn btn-primary" id="resSubmit">Submit</button>
+						</form>
+					</div><!--End body-->
+				</div><!--End panel-->
+			</div><!--End col-->
+		</div><!--End row-->
+	</div><!--End container-->
+<script type="text/javascript">
+	//onClick event for submit button
+	$("#resSubmit").on("click", function(event){
+		event.preventDefault();
+		//Creates reservation object from form input
+		var reservation = {
+			name: $("#resName").val(),
+			number: $("#resNum").val(),
+			email: $("#resEmail").val(),
+			resID: $("#resID").val()
+		};
+
+		var currentURL = window.location.origin;
+
+		//Post request sends reservation to route URL
+		$.post(currentURL+"/api/new", reservation, function(data){
+			//Temp console log
+			console.log(data);
+			//Clears form fields on submit
+			$("#resName").val("");
+			$("#resNum").val("");
+			$("#resEmail").val("");
+			$("#resID").val("");
+		});
+	});
+</script>
+</body>
+</html>
