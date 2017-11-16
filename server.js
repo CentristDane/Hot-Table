@@ -21,7 +21,7 @@ app.get("/", function(req, res) {
   res.sendFile(path.join(__dirname, "client.html"));
 });
 
-app.get("/add", function(req, res) {
+app.get("/reserve", function(req, res) {
   res.sendFile(path.join(__dirname, "reserve.html"));
 });
 
@@ -39,7 +39,7 @@ app.get("/api/:reservationInfo", function(req, res) {
   return res.json(reservationInfo)
 });
 
-app.get("/api/:waitinglist", function(req, res) {
+app.get("/api/:waitingList", function(req, res) {
   return res.json(waitingList)
 
 });
@@ -50,7 +50,6 @@ app.post("/api/new", function(req, res) {
   // req.body hosts is equal to the JSON post sent from the user
   // This works because of our body-parser middleware
   var newReservation = req.body;
-  newReservation = newReservation.name.replace(/\s+/g, "").toLowerCase();
 
   console.log(newReservation);
   res.json(newReservation);
@@ -62,6 +61,8 @@ app.post("/api/new", function(req, res) {
   	waitingList.push(newReservation);
 
   }
+  console.log(waitingList);
+  console.log(reservationInfo);
 });
 
 // Starts the server to begin listening
